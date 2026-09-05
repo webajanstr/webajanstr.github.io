@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kilisli Ali Usta Kebap & Lahmacun | Beylikdüzü</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400..700;1,400..700&family=Zilla+Slab:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --komur: #241E1A;
+            --hamur: #F4ECDD;
+            --isot: #8E2C1A;
+            --bakir: #B0763C;
+            --fistik: #6B7C3D;
+            --murekkep: #3A322B;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Karla', sans-serif;
+            background-color: var(--hamur);
+            color: var(--murekkep);
+            line-height: 1.6;
+            font-size: 1.05rem;
+            padding-bottom: 70px; /* Mobil alt çubuk için boşluk */
+        }
+
+        @media (min-width: 768px) {
+            body {
+                padding-bottom: 0;
+            }
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Zilla Slab', serif;
+            font-weight: 700;
+            color: var(--komur);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* Ortak Sınıflar ve Yapılar */
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            padding: 5rem 0;
+            border-bottom: 1px solid var(--bakir);
+        }
+
+        .bg-komur {
+            background-color: var(--komur);
+            color: var(--hamur);
+        }
+
+        .bg-komur h1, .bg-komur h2, .bg-komur h3 {
+            color: var(--hamur);
+        }
+
+        .bg-acik {
+            background-color: var(--hamur);
+            color: var(--murekkep);
+        }
+
+        /* Fotoğraf Yok Durumu (Fallback) */
+        .foto-yok {
+            background: linear-gradient(135deg, var(--komur), var(--isot));
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bakir);
+            font-family: 'Zilla Slab', serif;
+        }
+
+        /* Butonlar */
+        .btn-grup {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--isot);
+            color: var(--hamur);
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: background-color 0.2s ease;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn:hover, .btn:focus {
+            background-color: #722213;
+            outline: 2px solid var(--bakir);
+            outline-offset: 2px;
+        }
+
+        .btn-ikincil {
+            background-color: transparent;
+            border: 1px solid var(--bakir);
+            color: inherit;
+        }
+
+        .bg-komur .btn-ikincil {
+            border-color: var(--bakir);
+            color: var(--hamur);
+        }
+
+        .bg-komur .btn-ikincil:hover, .bg-komur .btn-ikincil:focus {
+            background-color: rgba(176, 118, 60, 0.2);
+        }
+
+        .btn-ikincil:hover, .btn-ikincil:focus {
+            background-color: rgba(176, 118, 60, 0.1);
+        }
+
+        /* 1. Hero Bölümü */
+        .hero {
+            background-color: var(--komur);
+            min-height: 75vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            padding: 4rem 0;
+            overflow: hidden;
+            border-bottom: 1px solid var(--bakir);
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.25;
+            z-index: 1;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .hero p.tanim {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            margin-bottom: 0.5rem;
+            color: #E2D6C3;
+        }
+
+        .hero p.detay {
+            font-size: 1rem;
+            color: var(--bakir);
+            margin-bottom: 2rem;
+        }
+
+        .hero-puan {
+            margin-top: 2rem;
+            font-size: 0.95rem;
+            color: #C5B8A5;
+        }
+
+        /* 2. Kısa Tanıtım */
+        .tanitim-metin {
+            font-size: 1.2rem;
+            max-width: 700px;
+            line-height: 1.7;
+        }
+
+        /* 3. Lezzetler */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            .menu-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .menu-kategori h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--isot);
+            border-bottom: 1px solid var(--bakir);
+            padding-bottom: 0.5rem;
+        }
+
+        .menu-liste {
+            list-style: none;
+        }
+
+        .menu-liste li {
+            padding: 0.6rem 0;
+            border-bottom: 1px dashed rgba(176, 118, 60, 0.4);
+            font-size: 1.1rem;
+        }
+
+        .menu-liste li:last-child {
+            border-bottom: none;
+        }
+
+        .menu-fotolar {
+            margin-top: 3rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .menu-fotolar {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .menu-fotolar img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        /* 4. Değerlendirmeler */
+        .degerlendirme-icerik {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .puanlar-kutusu {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        @media (min-width: 600px) {
+            .puanlar-kutusu {
+                flex-direction: row;
+                gap: 3rem;
+            }
+        }
+
+        .puan-oge h3 {
+            font-size: 2rem;
+            color: var(--bakir);
+            margin-bottom: 0.2rem;
+        }
+
+        .one-cikanlar {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .one-cikanlar {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .one-cikan-kart {
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--bakir);
+            padding: 1.2rem;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        /* 5. Paket Servis */
+        .paket-butonlar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        /* 6. İletişim ve Konum */
+        .iletisim-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .iletisim-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .iletisim-bilgi p {
+            margin-bottom: 0.8rem;
+        }
+
+        .iletisim-bilgi strong {
+            color: var(--bakir);
+        }
+
+        .harita-kutusu {
+            width: 100%;
+            height: 300px;
+            border: 1px solid var(--bakir);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .harita-kutusu iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* 7. Mobil Alt Çubuk */
+        .mobil-alt-cubuk {
+            display: flex;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--komur);
+            border-top: 1px solid var(--bakir);
+            z-index: 1000;
+        }
+
+        .mobil-alt-cubuk a {
+            flex: 1;
+            text-align: center;
+            padding: 1rem;
+            color: var(--hamur);
+            font-weight: 500;
+            background-color: var(--isot);
+        }
+
+        .mobil-alt-cubuk a:first-child {
+            background-color: var(--komur);
+            border-right: 1px solid var(--bakir);
+        }
+
+        .mobil-alt-cubuk a:hover, .mobil-alt-cubuk a:focus {
+            opacity: 0.9;
+        }
+
+        @media (min-width: 768px) {
+            .mobil-alt-cubuk {
+                display: none;
+            }
+        }
+
+        /* 8. Footer */
+        footer {
+            background-color: #1a1512;
+            color: #C5B8A5;
+            padding: 3rem 0;
+            font-size: 0.95rem;
+        }
+
+        footer .container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            footer .container {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Hero Bölümü -->
+    <header class="hero">
+        <img src="./foto/1.jpg" alt="Kilisli Ali Usta İçi" class="hero-bg" onerror="this.style.display='none'; this.parentElement.classList.add('foto-yok')">
+        <div class="container">
+            <h1>Kilisli Ali Usta Kebap & Lahmacun</h1>
+            <p class="tanim">Kilis ve Antep usulü kebap, odun ateşinde lahmacun</p>
+            <p class="detay">Beylikdüzü · Gece 02:00'a kadar açık</p>
+            
+            <div class="btn-grup">
+                <a href="tel:+902129990265" class="btn">Ara</a>
+                <a href="https://maps.google.com/maps?q=Kilisli%20Ali%20Usta%20Kebap%20Lahmacun%20Beylikd%C3%üz%C3%BC" target="_blank" rel="noopener" class="btn btn-ikincil">Yol tarifi</a>
+            </div>
+
+            <div class="hero-puan">
+                Google 4,3 · 83 değerlendirme
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 2. Kısa Tanıtım -->
+        <section class="bg-acik">
+            <div class="container">
+                <p class="tanitim-metin">
+                    Kilis ve Antep mutfağının geleneksel tatlarını Beylikdüzü'ne taşıyoruz. Lahmacunlarımızı taze hamur ve özenle hazırlanan zırh kıymasıyla odun ateşinde pişiriyor, kebaplarımızı kömür ateşinin lezzetiyle buluşturuyoruz. Kaliteli malzeme ve ustalıkla hazırlanan lezzetlerimizi denemek için sizi de bekleriz.
+                </p>
+            </div>
+        </section>
+
+        <!-- 3. Lezzetler -->
+        <section class="bg-acik" style="padding-top: 0;">
+            <div class="container">
+                <div class="menu-grid">
+                    <div class="menu-kategori">
+                        <h3>Lahmacunlar</h3>
+                        <ul class="menu-liste">
+                            <li>Antep usulü lahmacun</li>
+                            <li>Sarımsaklı lahmacun</li>
+                        </ul>
+                    </div>
+
+                    <div class="menu-kategori">
+                        <h3>Kebaplar</h3>
+                        <ul class="menu-liste">
+                            <li>Adana dürüm</li>
+                            <li>Satır kıyma Adana (köz ateşinde)</li>
+                            <li>Kebap tabakları</li>
+                        </ul>
+                    </div>
+
+                    <div class="menu-kategori">
+                        <h3>Tavalar</h3>
+                        <ul class="menu-liste">
+                            <li>Kilis tava</li>
+                            <li>Saç tava</li>
+                        </ul>
+                    </div>
+
+                    <div class="menu-kategori">
+                        <h3>Başlangıç ve Tatlı</h3>
+                        <ul class="menu-liste">
+                            <li>Çorba</li>
+                            <li>Mezeler</li>
+                            <li>Künefe</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="menu-fotolar">
+                    <img src="./foto/2.jpg" alt="Kebap ve Lahmacun Sunumu" onerror="this.style.display='none'; this.parentElement.classList.add('foto-yok')">
+                    <img src="./foto/3.jpg" alt="Restorandan Kareler" onerror="this.style.display='none'; this.parentElement.classList.add('foto-yok')">
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Değerlendirmeler -->
+        <section class="bg-komur">
+            <div class="container">
+                <div class="degerlendirme-icerik">
+                    <h2>Değerlendirmeler</h2>
+                    
+                    <div class="puanlar-kutusu">
+                        <div class="puan-oge">
+                            <h3>4,3 / 5</h3>
+                            <p>Google · 83 değerlendirme</p>
+                        </div>
+                        <div class="puan-oge">
+                            <h3>4,4 / 5</h3>
+                            <p>Yandex · 11 değerlendirme</p>
+                        </div>
+                    </div>
+
+                    <div class="one-cikanlar">
+                        <div class="one-cikan-kart">Köz ateşinde pişen Adana</div>
+                        <div class="one-cikan-kart">Gece 02:00'a kadar sıcak paket servis</div>
+                        <div class="one-cikan-kart">Antep usulü lahmacun</div>
+                    </div>
+
+                    <div>
+                        <a href="https://www.google.com/search?q=Kilisli+Ali+Usta+Kebap+Lahmacun+Beylikd%C3%üz%C3%BC" target="_blank" rel="noopener" class="btn btn-ikincil">Google'da yorumları oku</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Paket Servis -->
+        <section class="bg-acik">
+            <div class="container">
+                <h2>Paket Servis</h2>
+                <p style="margin-top: 0.5rem; margin-bottom: 1rem;">Sıcak ve hızlı paket servisimizle lezzetlerimiz kapınızda.</p>
+                <div class="paket-butonlar">
+                    <!-- BURAYA gerçek link yapıştırılacak -->
+                    <a href="#" class="btn" target="_blank" rel="noopener">Yemeksepeti</a>
+                    <!-- BURAYA gerçek link yapıştırılacak -->
+                    <a href="#" class="btn" target="_blank" rel="noopener">Migros Yemek</a>
+                    <!-- BURAYA gerçek link yapıştırılacak -->
+                    <a href="#" class="btn" target="_blank" rel="noopener">TGO Yemek</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. İletişim ve Konum -->
+        <section class="bg-komur">
+            <div class="container">
+                <div class="iletisim-grid">
+                    <div class="iletisim-bilgi">
+                        <h2>İletişim ve Konum</h2>
+                        <br>
+                        <p><strong>Adres:</strong> Kavaklı Mah. Muhammed Cinnah Sk. No:51, Beylikdüzü / İstanbul</p>
+                        <p><strong>Telefon:</strong> <a href="tel:+902129990265" style="text-decoration: underline;">0212 999 02 65</a></p>
+                        <p><strong>Çalışma Saatleri:</strong> Her gün, gece 02:00'a kadar açık</p>
+
+                        <div class="btn-grup">
+                            <a href="tel:+902129990265" class="btn">Ara</a>
+                            <a href="https://maps.google.com/maps?q=Kilisli%20Ali%20Usta%20Kebap%20Lahmacun%20Beylikd%C3%üz%C3%BC" target="_blank" rel="noopener" class="btn btn-ikincil">Yol tarifi</a>
+                        </div>
+                    </div>
+
+                    <div class="harita-kutusu">
+                        <iframe src="https://maps.google.com/maps?q=Kilisli%20Ali%20Usta%20Kebap%20Lahmacun%20Beylikd%C3%üz%C3%BC&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Kilisli Ali Usta Konum"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 7. Mobil Alt Çubuk -->
+    <div class="mobil-alt-cubuk">
+        <a href="tel:+902129990265">Ara</a>
+        <a href="https://maps.google.com/maps?q=Kilisli%20Ali%20Usta%20Kebap%20Lahmacun%20Beylikd%C3%üz%C3%BC" target="_blank" rel="noopener">Yol tarifi</a>
+    </div>
+
+    <!-- 8. Footer -->
+    <footer>
+        <div class="container">
+            <div>
+                <strong>Kilisli Ali Usta Kebap & Lahmacun</strong>
+            </div>
+            <div>
+                Kavaklı Mah. Muhammed Cinnah Sk. No:51, Beylikdüzü / İstanbul
+            </div>
+            <div>
+                Tel: 0212 999 02 65 | Her gün 02:00'a kadar açık
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
